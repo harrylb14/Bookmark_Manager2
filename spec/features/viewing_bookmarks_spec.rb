@@ -5,9 +5,9 @@ feature 'shows bookmarks' do
   end
 
   scenario 'user wants to see bookmarks' do
-    connection = PG.connect(dbname: 'bookmark_manager_test')
-    connection.exec("INSERT INTO bookmarks Values (1, 'http://www.google.com');")
-    connection.exec("INSERT INTO bookmarks Values (2, 'http://www.facebook.com');")
+    PG.connect(dbname: 'bookmark_manager_test')
+    Bookmark.add('http://www.google.com')
+    Bookmark.add('http://www.facebook.com')
 
     visit('/bookmarks')
     
