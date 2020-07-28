@@ -1,5 +1,5 @@
 class Bookmark
   def self.all
-    @bookmarks = ["Facebook", "GitHub", "Makers"]
+    ["Facebook", "GitHub", "Makers"]
   end
 end
