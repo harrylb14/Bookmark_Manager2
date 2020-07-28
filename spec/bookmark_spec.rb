@@ -1,6 +1,11 @@
 require 'bookmark'
 describe Bookmark do
-  it 'shows a list of hardcoded bookmarks' do
-    expect(Bookmark.all).to eq(["Facebook", "GitHub", "Makers"])
+  describe '.all' do
+    it 'shows a list of bookmarks' do
+      connection = PG.connect(dbname: 'bookmark_manager_test')
+      connection.exec("INSERT INTO bookmarks Values (1, 'http://www.google.com');")
+
+      expect(Bookmark.all).to include "http://www.google.com"
+    end
   end
 end
