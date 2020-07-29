@@ -16,10 +16,7 @@ feature 'adding bookmarks' do
   end
 
   scenario 'submitting new bookmark adds new bookmark to database' do
-    visit '/bookmarks'
-    fill_in 'New_url', with: 'www.woolworths.com'
-    fill_in 'New_title', with: 'Woolworths'
-    click_button 'Submit new bookmark'
+    input_woolworths
     expect(page).to have_link('Woolworths', href: 'www.woolworths.com')
   end
 end

@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/student/Projects/Bookmark_Manager2/spec/bookmark_spec.rb": {
+      "/Users/student/Documents/Projects/Bookmark_Manager/spec/bookmark_spec.rb": {
         "lines": [
           1,
           1,
@@ -30,11 +30,19 @@
           1,
           null,
           null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
           null,
           null
         ]
       },
-      "/Users/student/Projects/Bookmark_Manager2/spec/features/adding_bookmarks_spec.rb": {
+      "/Users/student/Documents/Projects/Bookmark_Manager/spec/features/adding_bookmarks_spec.rb": {
         "lines": [
           1,
           1,
@@ -56,6 +64,20 @@
           1,
           1,
           1,
+          null,
+          null
+        ]
+      },
+      "/Users/student/Documents/Projects/Bookmark_Manager/spec/features/deleting_bookmarks_spec.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
           1,
           1,
           1,
@@ -63,7 +85,7 @@
           null
         ]
       },
-      "/Users/student/Projects/Bookmark_Manager2/spec/features/viewing_bookmarks_spec.rb": {
+      "/Users/student/Documents/Projects/Bookmark_Manager/spec/features/viewing_bookmarks_spec.rb": {
         "lines": [
           1,
           1,
@@ -84,7 +106,7 @@
           null
         ]
       },
-      "/Users/student/Projects/Bookmark_Manager2/spec/features/welcome_page_spec.rb": {
+      "/Users/student/Documents/Projects/Bookmark_Manager/spec/features/welcome_page_spec.rb": {
         "lines": [
           1,
           1,
@@ -95,6 +117,6 @@
         ]
       }
     },
-    "timestamp": 1596036473
+    "timestamp": 1596039131
   }
 }

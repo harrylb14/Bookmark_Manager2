@@ -23,7 +23,15 @@ describe Bookmark do
       expect(bookmark.id).to eq persisted_data['id']
       expect(bookmark.title).to eq 'Woolworths'
       expect(bookmark.url).to eq 'www.woolworths.com'
-      
+    end
+  end
+  describe '.delete' do
+    it 'deletes the bookmark from the database' do 
+      Bookmark.add(url: 'www.woolworths.com', title: "Woolworths")
+      Bookmark.delete("Woolworths")
+      bookmarks = Bookmark.all
+
+      expect(bookmarks.length).to eq 0
     end
   end
 end
