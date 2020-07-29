@@ -6,12 +6,12 @@ feature 'shows bookmarks' do
 
   scenario 'user wants to see bookmarks' do
     PG.connect(dbname: 'bookmark_manager_test')
-    Bookmark.add('http://www.google.com')
-    Bookmark.add('http://www.facebook.com')
+    Bookmark.add(url: 'http://www.google.com', title: 'Google')
+    Bookmark.add(url: 'http://www.facebook.com', title: 'Faceyb')
 
     visit('/bookmarks')
     
-    expect(page).to have_content('http://www.google.com')
-    expect(page).to have_content('http://www.facebook.com')
+    expect(page).to have_link('Google', href: 'http://www.google.com')
+    expect(page).to have_link('Faceyb', href: 'http://www.facebook.com')
   end
 end

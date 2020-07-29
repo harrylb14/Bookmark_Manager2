@@ -3,15 +3,27 @@ describe Bookmark do
   describe '.all' do
     it 'shows a list of bookmarks' do
       PG.connect(dbname: 'bookmark_manager_test')
-      Bookmark.add('http://www.google.com')
-      expect(Bookmark.all).to include 'http://www.google.com'
+      bookmark = Bookmark.add(url: 'http://www.google.com', title: "Google")
+      
+      bookmarks = Bookmark.all
+
+      expect(bookmarks.length).to eq 1
+      expect(bookmarks.first).to be_a Bookmark
+      expect(bookmarks.first.id).to eq bookmark.id
+      expect(bookmarks.first.title).to eq 'Google'
+      expect(bookmarks.first.url).to eq 'http://www.google.com'
     end
   end
   describe '.add' do
-    it 'adds new bookmarks to the database' do
-      PG.connect(dbname: 'bookmark_manager_test')
-      Bookmark.add('www.woolworths.com')
-      expect(Bookmark.all).to include 'www.woolworths.com'
+    it 'adds new bookmark url to the database' do
+      bookmark = Bookmark.add(url: 'www.woolworths.com', title: "Woolworths")
+      persisted_data = persisted_data(id: bookmark.id)
+      
+      expect(bookmark).to be_a Bookmark
+      expect(bookmark.id).to eq persisted_data['id']
+      expect(bookmark.title).to eq 'Woolworths'
+      expect(bookmark.url).to eq 'www.woolworths.com'
+      
     end
   end
 end
