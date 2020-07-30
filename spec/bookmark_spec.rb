@@ -16,18 +16,23 @@ describe Bookmark do
   end
   describe '.add' do
     it 'adds new bookmark url to the database' do
-      bookmark = Bookmark.add(url: 'www.woolworths.com', title: "Woolworths")
+      bookmark = Bookmark.add(url: 'https://www.woolworths.com.au', title: "Woolworths")
       persisted_data = persisted_data(id: bookmark.id)
       
       expect(bookmark).to be_a Bookmark
       expect(bookmark.id).to eq persisted_data['id']
       expect(bookmark.title).to eq 'Woolworths'
-      expect(bookmark.url).to eq 'www.woolworths.com'
+      expect(bookmark.url).to eq 'https://www.woolworths.com.au'
+    end
+
+    it 'does not create a new bookmark if the URL is not valid' do
+      Bookmark.add(url: 'not a real bookmark', title: 'not a real bookmark')
+      expect(Bookmark.all).to be_empty
     end
   end
   describe '.delete' do
     it 'deletes the bookmark from the database' do 
-      bookmark = Bookmark.add(title: 'Woolworths', url: 'www.woolworths.com')
+      bookmark = Bookmark.add(title: 'Woolworths', url: 'https://www.woolworths.com.au')
       Bookmark.delete(id: bookmark.id)
       expect(Bookmark.all.length).to eq 0
     end
@@ -35,7 +40,7 @@ describe Bookmark do
 
   describe '.update' do
     it 'updates the bookmark with the given data' do
-      bookmark = Bookmark.add(title: 'Woolworths', url: 'http://www.woolworths.com')
+      bookmark = Bookmark.add(title: 'Woolworths', url: 'http://https://www.woolworths.com.au')
       updated_bookmark = Bookmark.update(id: bookmark.id, url: 'http://www.ripwoolworths.com', title: 'RIP Woolworths')
   
       expect(updated_bookmark).to be_a Bookmark
@@ -47,14 +52,14 @@ describe Bookmark do
 
   describe '.find' do
     it 'returns the requested bookmark object' do
-      bookmark = Bookmark.add(title: 'Woolworths', url: 'http://www.woolworths.com')
+      bookmark = Bookmark.add(title: 'Woolworths', url: 'http://https://www.woolworths.com.au')
 
       result = Bookmark.find(id: bookmark.id)
 
       expect(result).to be_a Bookmark
       expect(result.id).to eq bookmark.id
       expect(result.title).to eq 'Woolworths'
-      expect(result.url).to eq 'http://www.woolworths.com'
+      expect(result.url).to eq 'http://https://www.woolworths.com.au'
     end
   end
 end

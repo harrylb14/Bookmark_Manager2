@@ -17,6 +17,16 @@ feature 'adding bookmarks' do
 
   scenario 'submitting new bookmark adds new bookmark to database' do
     input_woolworths
-    expect(page).to have_link('Woolworths', href: 'www.woolworths.com')
+    expect(page).to have_link('Woolworths', href: 'https://www.woolworths.com.au')
+  end
+
+  scenario 'The bookmark must be a valid URL' do
+    visit('/bookmarks')
+    fill_in('New_title', with: 'fakey')
+    fill_in('New_url', with: 'not a real bookmark')
+    click_button('Submit')
+  
+    expect(page).not_to have_content "fakey"
+    expect(page).to have_content "You must submit a valid URL."
   end
 end
