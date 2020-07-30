@@ -29,17 +29,16 @@ class Bookmark
    
     result = connection.exec("INSERT INTO bookmarks (url, title) 
       VALUES ('#{url}', '#{title}') 
-      RETURNING id, url, title;")
+      RETURNING *;")
     Bookmark.new(id: result[0]['id'], title: result[0]['title'], url: result[0]['url'])
   end
 
-  def self.delete(title)
+  def self.delete(id:)
     if ENV['RACK_ENV'] == 'test'
       connection = PG.connect(dbname: 'bookmark_manager_test')
     else
       connection = PG.connect(dbname: 'bookmark_manager')
     end
-
-    connection.exec("DELETE FROM bookmarks WHERE title = '#{title}';")
-  end
+    connection.exec("DELETE FROM bookmarks WHERE id = #{id}")
+  end  
 end

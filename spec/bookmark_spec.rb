@@ -27,11 +27,9 @@ describe Bookmark do
   end
   describe '.delete' do
     it 'deletes the bookmark from the database' do 
-      Bookmark.add(url: 'www.woolworths.com', title: "Woolworths")
-      Bookmark.delete("Woolworths")
-      bookmarks = Bookmark.all
-
-      expect(bookmarks.length).to eq 0
+      bookmark = Bookmark.add(title: 'Woolworths', url: 'www.woolworths.com')
+      Bookmark.delete(id: bookmark.id)
+      expect(Bookmark.all.length).to eq 0
     end
   end
 end
