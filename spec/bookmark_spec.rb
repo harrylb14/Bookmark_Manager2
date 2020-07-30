@@ -17,10 +17,10 @@ describe Bookmark do
   describe '.add' do
     it 'adds new bookmark url to the database' do
       bookmark = Bookmark.add(url: 'https://www.woolworths.com.au', title: "Woolworths")
-      persisted_data = persisted_data(id: bookmark.id)
+      persisted_data = persisted_data(table: 'bookmarks', id: bookmark.id)
       
       expect(bookmark).to be_a Bookmark
-      expect(bookmark.id).to eq persisted_data['id']
+      expect(bookmark.id).to eq persisted_data.first['id']
       expect(bookmark.title).to eq 'Woolworths'
       expect(bookmark.url).to eq 'https://www.woolworths.com.au'
     end
@@ -60,6 +60,17 @@ describe Bookmark do
       expect(result.id).to eq bookmark.id
       expect(result.title).to eq 'Woolworths'
       expect(result.url).to eq 'http://https://www.woolworths.com.au'
+    end
+  end
+
+  let(:comment_class) { double(:comment_class) }
+
+  describe '#comments' do
+    it 'calls .where on the Comment class' do
+      bookmark = Bookmark.add(title: 'Woolworths', url: 'http://www.woolworths.com.au')
+      expect(comment_class).to receive(:where).with(bookmark_id: bookmark.id)
+
+      bookmark.comments(comment_class)
     end
   end
 end
